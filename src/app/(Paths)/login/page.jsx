@@ -20,6 +20,7 @@ const page = () => {
 					<SignUpPage />
 				</>
 			)}
+			
 		</AuthChoiceContext.Provider>
 	);
 };

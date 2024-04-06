@@ -10,14 +10,14 @@ const Header = () => {
 				<Image src={commSchool} alt="logo" width={75} height={75} />
 				<nav>
 					<ul className="flex flex-row gap-10">
-					<li>
-							<Link href={'/'}>Home</Link>
+						<li>
+							<Link href={"/"}>Home</Link>
 						</li>
 						<li>
-							<Link href={'/profile'}>Your Blogs</Link>
+							<Link href={"/profile"}>Your Blogs</Link>
 						</li>
 						<li>
-							<Link href={'/upload'}>Upload Blogs</Link>
+							<Link href={"/upload"}>Upload Blogs</Link>
 						</li>
 					</ul>
 				</nav>

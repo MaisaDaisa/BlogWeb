@@ -14,7 +14,5 @@ export const saveToken = (response) => {
         cookies().set("idToken", response.idToken)
         cookies().set("kind", response.kind)
         cookies().set("email", response.email)
-
-        redirect("/");
     }
 };

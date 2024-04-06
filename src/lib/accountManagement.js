@@ -5,33 +5,38 @@ import { saveToken } from "./dealWithToken";
 
 
 export async function createAccount(email, password, username) {
-    try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-        await updateProfile(user, {
-            displayName: username,
-        });
-        saveToken(userCredential._tokenResponse);
-    } catch (error) {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // Handle error
-        console.error(errorMessage);
-    }
+    return new Promise((resolve, reject) => {
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                saveToken(userCredential._tokenResponse);
+                return updateProfile(auth.currentUser, {
+                    displayName: username
+                });
+            })
+            .then(() => {
+                resolve();
+            })
+            .catch((error) => {
+                reject(error);
+            });
+    });
 }
 
 
 
 export async function Login(email, password) {
-    signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            saveToken(userCredential._tokenResponse);
-            const user = userCredential.user;
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-        });
+    return new Promise((resolve, reject) => {
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                saveToken(userCredential._tokenResponse);
+                resolve();
+            })
+            .catch((error) => {
+                reject(error);
+            });
+    });
 }
+
+
 
 
