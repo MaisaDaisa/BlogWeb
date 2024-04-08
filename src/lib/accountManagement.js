@@ -9,11 +9,13 @@ export async function createAccount(email, password, username) {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 saveToken(userCredential._tokenResponse);
-                return updateProfile(auth.currentUser, {
-                    displayName: username
-                });
-            })
-            .then(() => {
+                try {
+                    updateProfile(auth.currentUser, {
+                        displayName: username
+                    })
+                } catch (error) {
+                    reject(error);
+                }
                 resolve();
             })
             .catch((error) => {

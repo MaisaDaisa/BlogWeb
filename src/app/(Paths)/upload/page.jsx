@@ -1,12 +1,11 @@
 import SubmitForm from "./SubmitForm";
-import { auth } from "@/lib/firebase";
+import DefaultLayout from "@/app/layout/DefaultLayout";
 
 const page = () => {
-    console.log(auth);
 	return (
-		<div className="w-full flex justify-center ">
+		<DefaultLayout>
 			<SubmitForm />
-		</div>
+		</DefaultLayout>
 	);
 };
 

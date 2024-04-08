@@ -1,11 +1,10 @@
 
 import React from 'react';
 import "./globals.css";
-import Header from "./layout/Header";
+import Header from "./layout/Header/Header";
 import Footer from './layout/Footer';
-import { getPosts } from '@/lib/blogManagement';
 import Container from './layout/Container';
-
+import HomePage from '@/app/(Paths)/homePage/HomePage';
 export default async function Home() {
 
 
@@ -13,7 +12,7 @@ export default async function Home() {
     <main>
       <Header />
       <Container>
-
+        <HomePage />
       </Container>
       <Footer />
     </main>

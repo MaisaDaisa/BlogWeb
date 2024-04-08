@@ -6,6 +6,7 @@ import AuthButton from '../../Components/AuthButton';
 import { AuthChoiceContext } from './authChoiceContext';
 import { Login } from '@/lib/accountManagement'; 
 import { Alert } from '@mui/material/';
+import { useRouter } from 'next/navigation';
 
 
 const LoginPage = () => {
@@ -19,6 +20,9 @@ const LoginPage = () => {
             await Login(event.target[0].value, event.target[1].value);
             setLoggedIn(true);
             setShowAlert(true);
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 2000);
         } catch (error) {
             console.log("error boy");
             setLoggedIn(false);

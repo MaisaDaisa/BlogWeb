@@ -3,25 +3,34 @@ import AuthInputField from "../../Components/AuthInputField";
 import AuthButton from "../../Components/AuthButton";
 import { AuthChoiceContext } from "./authChoiceContext";
 import { createAccount } from "@/lib/accountManagement";
-import { updateProfile } from "@/lib/accountManagement";
+import { Alert } from "@mui/material/";
 
 const SignUpPage = () => {
 	const { setWantsLogin } = useContext(AuthChoiceContext);
-	const handleSubmit = (event) => {
+	const [showAlert, setShowAlert] = React.useState(false);
+	const [signedUp, setSignedUp] = React.useState(false);
+	const handleSubmit = async (event) => {
 		event.preventDefault();
 		try {
-			createAccount(
+			await createAccount(
 				event.target[1].value,
 				event.target[2].value,
 				event.target[0].value
-			)
+			);
+			console.log("Account Created");
+			setSignedUp(true);
+			setShowAlert(true);
+			setTimeout(() => {
+				setWantsLogin(true);
+			}, 2000);
 		} catch (error) {
 			console.log(error);
+			setShowAlert(true);
 		}
 	};
 
 	return (
-		<div className="flex flex-row items-center justify-center h-dvh">
+		<div className="flex flex-col items-center justify-center h-dvh relative">
 			<form
 				className="flex flex-col items-center justify-center w-80 gap-3"
 				onSubmit={handleSubmit}>
@@ -48,6 +57,11 @@ const SignUpPage = () => {
 					</u>
 				</p>
 			</form>
+			{showAlert && (
+					<Alert severity={ signedUp ? "success" : 'error'} className="relative -bottom-20">
+						{signedUp ? "Login Successful. Redirecting..." : "Error Signing Up. Please try again."}
+					</Alert>
+				)}
 		</div>
 	);
 };
