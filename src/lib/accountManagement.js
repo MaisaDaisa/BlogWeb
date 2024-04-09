@@ -26,7 +26,7 @@ export async function createAccount(email, password, username) {
 
 
 
-export async function Login(email, password) {
+export async function login(email, password) {
     return new Promise((resolve, reject) => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
@@ -37,6 +37,20 @@ export async function Login(email, password) {
                 reject(error);
             });
     });
+}
+
+export async function logout() {
+    return new Promise((resolve, reject) => {
+        auth.signOut()
+            .then(() => {
+                console.log("Logged out");
+                resolve();
+            })
+            .catch((error) => {
+                reject(error);
+            });
+    });
+    
 }
 
 

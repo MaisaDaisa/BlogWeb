@@ -1,10 +1,11 @@
 import React from "react";
 
-import { getPosts } from "@/lib/postManagement";
+import { getUserPosts } from "@/lib/postManagement";
 import PostDisplay1 from "@/app/Components/PostDisplay1";
 
-const HomePage = async () => {
-	const posts = await getPosts();
+const 	UserPosts = async () => {
+	const posts = await getUserPosts();
+	console.log(posts);
 	return (
 		<div className="flex flex-row justify-center w-full mt-20">
 		<div className="flex flex-row flex-wrap gap-10 items-center justify-start w-3/4">
@@ -28,11 +29,11 @@ const HomePage = async () => {
 					);
 				})
 			) : (
-				<p>No posts found</p>
+				<p className="justify-items-center self-center">No posts found</p>
 			)}
 		</div>
 		</div>
 	);
 };
 
-export default HomePage;
+export default UserPosts;

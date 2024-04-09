@@ -39,10 +39,45 @@ export async function createPost(title, content, imageUrl) {
 }
 
 export async function getPosts() {
-	const q = query(postsCollection, orderBy("datePosted", "desc"), limit(10));
-	const queryData = await getDocs(q);
-	return queryData.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+  try {
+    const q = query(postsCollection, orderBy("datePosted", "desc"), limit(10));
+    const queryData = await getDocs(q);
+    return queryData.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    return []; // Return an empty array if there's an error
+  }
 }
+
+export async function getUserPosts() {
+	try {
+	  const q = query(
+		postsCollection,
+		where("author.id", "==", auth.currentUser.uid),
+		orderBy("datePosted", "desc")
+	  );
+	  const queryData = await getDocs(q);
+	  return queryData.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+	} catch (error) {
+	  console.error("Error fetching user posts:", error);
+	  return [];
+	}
+  }
+
+export async function deletePost(postId) {
+	if (!auth.currentUser) return;
+	if (!postId) return;
+
+	const postRef = doc(postsCollection, postId);
+	const postSnap = await getDoc(postRef);
+	const postData = postSnap.data();
+
+	if (postData.author.id === auth.currentUser.uid) {
+		await deleteDoc(postRef);
+	}
+}
+
+
 
 export async function likeFunc(postId, isLiked) {
 	if (!auth.currentUser) return;

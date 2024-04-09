@@ -4,7 +4,7 @@ import Image from 'next/image';
 import AuthInputField from '../../Components/AuthInputField';
 import AuthButton from '../../Components/AuthButton';
 import { AuthChoiceContext } from './authChoiceContext';
-import { Login } from '@/lib/accountManagement'; 
+import { login } from '@/lib/accountManagement'; 
 import { Alert } from '@mui/material/';
 import { useRouter } from 'next/navigation';
 
@@ -17,7 +17,7 @@ const LoginPage = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await Login(event.target[0].value, event.target[1].value);
+            await login(event.target[0].value, event.target[1].value);
             setLoggedIn(true);
             setShowAlert(true);
             setTimeout(() => {

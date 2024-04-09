@@ -34,7 +34,7 @@ const PostDisplay1 = ({
 	}, []);
 
 	return (
-		<div className="flex flex-col items-center gap-2 p-3 border-2 w-1/4 h-[550px] border-primary-green rounded-lg">
+		<div className="flex flex-col items-center gap-2 p-3 border-2 w-[370px] h-[600px] border-primary-green rounded-lg">
 			<div className="flex items-center gap-2 self-start">
 				<Image src={profileImage ? profileImage : defaultProfile } width={30} height={30} alt="ProfileImage" className="rounded-full" />
 				<div className="flex flex-col">

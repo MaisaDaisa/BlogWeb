@@ -15,7 +15,7 @@ const Header = () => {
 							<Link href={"/"}>Home</Link>
 						</li>
 						<li>
-							<Link href={"/profile"}>Your Posts</Link>
+							<Link href={"/userposts"}>Your Posts</Link>
 						</li>
 						<li>
 							<Link href={"/upload"}>Upload Post</Link>
@@ -30,9 +30,7 @@ const Header = () => {
 							className="p-4 py-2 border-gray-200 border-2 rounded-lg"
 						/>
 					</div>
-					<div className="flex flex-row items-center gap-2">
-						<ProfilePicture />
-					</div>
+					<ProfilePicture />
 				</div>
 			</div>
 		</header>
